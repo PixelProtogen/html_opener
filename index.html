@@ -21,7 +21,7 @@
                 .then(data => {
                     // Set the fetched HTML content as innerHTML to render it
                     const pasteContentDiv = document.getElementById('paste-content');
-                    pasteContentDiv.innerHTML = data;
+                    pasteContentDiv.innerHTML = data; // Ensure this is HTML
                 })
                 .catch(error => {
                     document.body.textContent = "Error loading paste!";
