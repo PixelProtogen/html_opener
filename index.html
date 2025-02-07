@@ -10,26 +10,27 @@
     <pre id="paste-content">Loading...</pre>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const pastebinRawUrl = urlParams.get('url');
-        
-        if (pastebinRawUrl) {
-            const proxyUrl = "https://corsproxy.io/?url=";
-            
-            fetch(proxyUrl + encodeURIComponent(pastebinRawUrl))
-                .then(response => response.text())
-                .then(data => {
-                    document.open();
-                    document.write(data);
-                    document.close();
-                })
-                .catch(error => {
-                    document.body.textContent = "Error loading HTML!";
-                    console.error("Error:", error);
-                });
-        } else {
-            document.body.textContent = "No HTML URL provided.";
-        }
+const urlParams = new URLSearchParams(window.location.search);
+const pastebinRawUrl = urlParams.get('url');
+
+if (pastebinRawUrl) {
+    const proxyUrl = "https://corsproxy.io/?url=";
+    
+    fetch(proxyUrl + encodeURIComponent(pastebinRawUrl))
+        .then(response => response.text())
+        .then(data => {
+            const pre = document.createElement('pre');
+            pre.textContent = data;
+            document.body.innerHTML = '';
+            document.body.appendChild(pre);
+        })
+        .catch(error => {
+            document.body.textContent = "Error loading paste!";
+            console.error("Error:", error);
+        });
+} else {
+    document.body.textContent = "No Pastebin URL provided.";
+}
     </script>
 </body>
 </html>
