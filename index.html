@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2>Raw HTML Content</h2>
-    <pre id="paste-content">Loading...</pre>
+    <div id="paste-content">Loading...</div>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -19,10 +19,9 @@
             fetch(proxyUrl + encodeURIComponent(pastebinRawUrl))
                 .then(response => response.text())
                 .then(data => {
-                    const pre = document.createElement('pre');
-                    pre.textContent = data;
-                    document.body.innerHTML = '';
-                    document.body.appendChild(pre);
+                    // Set the fetched HTML content as innerHTML to render it
+                    const pasteContentDiv = document.getElementById('paste-content');
+                    pasteContentDiv.innerHTML = data;
                 })
                 .catch(error => {
                     document.body.textContent = "Error loading paste!";
