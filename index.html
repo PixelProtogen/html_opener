@@ -14,7 +14,7 @@
         const pastebinRawUrl = urlParams.get('url');
 
         if (pastebinRawUrl) {
-            fetch(pastebinRawUrl)
+            fetch("https://cors-anywhere.herokuapp.com/" + pastebinRawUrl)
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('paste-content').textContent = data;
