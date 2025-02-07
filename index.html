@@ -19,7 +19,9 @@
             fetch(proxyUrl + encodeURIComponent(pastebinRawUrl))
                 .then(response => response.text())
                 .then(data => {
-                    document.body.textContent = data;
+                    document.open();
+                    document.write(data);
+                    document.close();
                 })
                 .catch(error => {
                     document.body.textContent = "Error loading paste!";
