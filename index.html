@@ -10,25 +10,23 @@
     <pre id="paste-content">Loading...</pre>
 
     <script>
+        // Get the URL parameter (Pastebin raw link)
         const urlParams = new URLSearchParams(window.location.search);
         const pastebinRawUrl = urlParams.get('url');
-        
+
         if (pastebinRawUrl) {
-            const proxyUrl = "https://corsproxy.io/?url=";
-            
-            fetch(proxyUrl + encodeURIComponent(pastebinRawUrl))
+            // Fetch the raw paste from Pastebin
+            fetch(pastebinRawUrl)
                 .then(response => response.text())
                 .then(data => {
-                    document.open();
-                    document.write(data);
-                    document.close();
+                    document.getElementById('paste-content').textContent = data;
                 })
                 .catch(error => {
-                    document.body.textContent = "Error loading paste!";
+                    document.getElementById('paste-content').textContent = "Error loading paste!";
                     console.error("Error:", error);
                 });
         } else {
-            document.body.textContent = "No Pastebin URL provided.";
+            document.getElementById('paste-content').textContent = "No Pastebin URL provided.";
         }
     </script>
 </body>
